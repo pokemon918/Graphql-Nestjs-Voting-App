@@ -1,0 +1,98 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreatePollInput {
+  name: String!
+  options: [String!]!
+}
+
+input CreateUserInput {
+  """Department"""
+  email: String!
+
+  """password"""
+  password: String!
+
+  """Name"""
+  userName: String!
+}
+
+"""Login Input"""
+input LoginUserInput {
+  """email"""
+  email: String!
+
+  """password"""
+  password: String!
+}
+
+type Mutation {
+  createPoll(createPollInput: CreatePollInput!): Poll
+  createUser(createUser: CreateUserInput!): User
+  loginUser(loginInput: LoginUserInput!): String
+  logout: String
+  removePoll(id: Int!): Poll!
+  removeUser(id: Int!): User!
+  updatePoll(updatePollInput: UpdatePollInput!): Poll!
+  updateUser(updateUser: UpdateUserInput!): User
+}
+
+type Poll {
+  id: String!
+  name: String!
+  pollOptions: [PollOption!]!
+  userId: String!
+}
+
+type PollOption {
+  id: String!
+  poll: Poll!
+  pollId: String!
+  text: String!
+  vote: Int!
+}
+
+type Query {
+  poll(id: String!): Poll!
+  user(id: String!): User!
+  users: [User!]!
+}
+
+input UpdatePollInput {
+  id: Int!
+  name: String
+  options: [String!]
+}
+
+input UpdateUserInput {
+  """Department"""
+  email: String!
+
+  """Name"""
+  id: String!
+
+  """active"""
+  isActive: Boolean!
+
+  """password"""
+  password: String
+
+  """Name"""
+  userName: String!
+}
+
+type User {
+  """Email"""
+  email: String!
+  id: String!
+
+  """active"""
+  isActive: Boolean!
+
+  """password"""
+  password: String!
+
+  """UserName"""
+  userName: String!
+}
