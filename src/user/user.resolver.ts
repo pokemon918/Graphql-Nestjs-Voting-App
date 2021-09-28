@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
 import { UserService } from './user.service';
-import { User } from './user.entity';
+import { MainUser } from './user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { LoginUserInput } from './dto/login-user.input';
@@ -9,34 +9,34 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/shared/auth.guard';
 
 
-@Resolver(() => User)
+@Resolver(() => MainUser)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
 
-  @Query(() => [User], { name: 'users' })
+  @Query(() => [MainUser], { name: 'users' })
   @UseGuards(AuthGuard)
   findAll() {
     return this.userService.findAll();
   }
 
-  @Query(() => User, { name: 'user' })
+  @Query(() => MainUser, { name: 'user' })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.userService.findOne(id);
   }
 
 
-  @Mutation(() => User, { nullable: true})
-  createUser(@Args('createUser') createUser: CreateUserInput): Promise<User | null > {
+  @Mutation(() => MainUser, { nullable: true})
+  createUser(@Args('createUser') createUser: CreateUserInput): Promise<MainUser | null > {
     return this.userService.create(createUser);
   }
 
-  @Mutation(() => User, { nullable: true})
+  @Mutation(() => MainUser, { nullable: true})
   updateUser(@Args('updateUser') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
-  @Mutation(() => User)
+  @Mutation(() => MainUser)
   removeUser(@Args('id', { type: () => Int }) id: number) {
     return this.userService.remove(id);
   }

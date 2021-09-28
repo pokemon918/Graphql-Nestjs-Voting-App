@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { User } from 'src/user/user.entity';
+import { MainUser } from 'src/user/user.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { PollOption } from './poll-option.entity';
 
@@ -18,8 +18,8 @@ export class Poll {
   @Column()
   userId: string;
 
-  @ManyToOne(() => User)
-  user: User;
+  @ManyToOne(() => MainUser, {cascade: false})
+  user: MainUser;
 
   @Field(() => [PollOption])
   @OneToMany(() => PollOption, polloption => polloption.poll)

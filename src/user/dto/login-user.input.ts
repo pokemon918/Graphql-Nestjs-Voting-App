@@ -1,8 +1,8 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { User } from '../user.entity';
+import { MainUser } from '../user.entity';
 
 @InputType({description: "Login Input"})
-export class LoginUserInput implements Partial<User> {
+export class LoginUserInput implements Partial<MainUser> {
 
   @Field(() => String, { description: 'email' })
   email: string;

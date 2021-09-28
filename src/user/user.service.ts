@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { CreateUserInput } from './dto/create-user.input';
 import { LoginUserInput } from './dto/login-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { User } from './user.entity';
+import { MainUser } from './user.entity';
 
 import * as bcrypt from 'bcryptjs';
 import { MyContext } from 'src/types/my-context';
@@ -16,9 +16,9 @@ import { confirmEmailLink } from 'src/utils/confirmEmailLinks';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private usersRepository: Repository<User>) {}
+  constructor(@InjectRepository(MainUser) private usersRepository: Repository<MainUser>) {}
 
-  async create(createUserInput: CreateUserInput): Promise<User | null> {
+  async create(createUserInput: CreateUserInput): Promise<MainUser | null> {
     const userExists = await this.usersRepository.findOne({where: {email: createUserInput.email}})
     if(userExists) {
        throw new GraphQLError("User Already Exist");
