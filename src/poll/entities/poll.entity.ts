@@ -18,7 +18,7 @@ export class Poll {
   @Column()
   userId: string;
 
-  @ManyToOne(() => MainUser, {cascade: false})
+  @ManyToOne(() => MainUser)
   user: MainUser;
 
   @Field(() => [PollOption])

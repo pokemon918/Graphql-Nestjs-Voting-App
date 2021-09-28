@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import {Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Poll } from 'src/poll/entities/poll.entity';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @ObjectType()
@@ -25,6 +26,10 @@ export class MainUser {
   @Column({ default: false })
   isActive: boolean;
 
+
+  @Field(() => [Poll])
+  @OneToMany(() => Poll, poll => poll.user)
+  pollOptions: Promise<Poll[]>;
 
   // public async comparePassword(password: string): Promise<boolean> {
   //   return await bcrypt.compare(password, this.password, 12);

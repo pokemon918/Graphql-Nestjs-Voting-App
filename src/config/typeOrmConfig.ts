@@ -9,7 +9,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     database: process.env.DB_NAME,
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     subscribers: [__dirname + '/../**/*.subscriber{.ts,.js}'],
-    synchronize: true,
+    synchronize: false,
     // dropSchema: true
 }
 
